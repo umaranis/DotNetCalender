@@ -1549,22 +1549,26 @@ namespace System.Windows.Forms.Calendar
                 if (e.Shift)
                     sStart = SelectedElementStart;
 
-                sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(0,(int)TimeScale,0)));
+                if (SelectedElementEnd != null)
+                    sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(0,(int)TimeScale,0)));
             }
             else if (e.KeyCode == Keys.Up)
             {
                 if (e.Shift)
                     sStart = SelectedElementStart;
 
-                sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(0, -(int)TimeScale, 0)));
+                if(SelectedElementEnd != null)
+                    sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(0, -(int)TimeScale, 0)));
             }
             else if (e.KeyCode == Keys.Right)
             {
-                sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(24, 0, 0)));
+                if (SelectedElementEnd != null)
+                    sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(24, 0, 0)));
             }
             else if (e.KeyCode == Keys.Left)
             {
-                sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(-24, 0, 0)));
+                if (SelectedElementEnd != null)
+                    sEnd = GetTimeUnit(SelectedElementEnd.Date.Add(new TimeSpan(-24, 0, 0)));
             }
             else if (e.KeyCode == Keys.PageDown)
             {
