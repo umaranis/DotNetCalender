@@ -107,7 +107,7 @@ namespace System.Windows.Forms.Calendar
         {
             base.OnInitialize(e);
 
-            e.Calendar.Font = SystemFonts.CaptionFont;
+            //e.Calendar.Font = SystemFonts.CaptionFont;
         }
 
         public override void OnDrawDayHeaderBackground(CalendarRendererDayEventArgs e)
