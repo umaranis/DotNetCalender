@@ -1736,7 +1736,10 @@ namespace System.Windows.Forms.Calendar
                     case CalendarState.DraggingItem:
                         TimeSpan duration = itemOnState.Duration;
                         itemOnState.SetIsDragging(true);
-                        itemOnState.StartDate = hitted.Date;
+                        if (DaysMode == CalendarDaysMode.Expanded)
+                            itemOnState.StartDate = hitted.Date;
+                        else 
+                            itemOnState.StartDate = hitted.Date.Add(itemOnState.StartDate.TimeOfDay);
                         itemOnState.EndDate = itemOnState.StartDate.Add(duration);
                         Renderer.PerformItemsLayout();
                         Invalidate();
