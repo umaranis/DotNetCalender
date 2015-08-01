@@ -140,7 +140,7 @@ namespace CalendarDemo
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            contextItem = calendar1.ItemAt(contextMenuStrip1.Bounds.Location);
+            contextItem = calendar1.ItemAt(calendar1.PointToClient(contextMenuStrip1.Bounds.Location));
         }
 
         private void redTagToolStripMenuItem_Click(object sender, EventArgs e)
