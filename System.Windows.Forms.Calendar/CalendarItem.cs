@@ -47,6 +47,7 @@ namespace System.Windows.Forms.Calendar
         private bool _isOnView;
         private int _minuteStartTop;
         private int _minuteEndTop;
+        private bool _showTime = true;
         private HatchStyle _pattern;
         private Color _patternColor;
         private List<CalendarTimeScaleUnit> _unitsPassing;
@@ -142,6 +143,15 @@ namespace System.Windows.Forms.Calendar
         {
             get { return _borderColor; }
             set { _borderColor = value; }
+        }
+
+        /// <summary>
+        /// Indicates whether to show the start time and end time of the task. This applies to the views without time dimension.
+        /// </summary>
+        public bool ShowTime
+        {
+            get { return _showTime; }
+            set { _showTime = value; }
         }
 
         /// <summary>
@@ -457,7 +467,11 @@ namespace System.Windows.Forms.Calendar
         {
             get
             {
-                return IsOpenStart || ((this.IsOnDayTop || Calendar.DaysMode == CalendarDaysMode.Short) && !StartDate.TimeOfDay.Equals(new TimeSpan(0, 0, 0)));
+                return _showTime &&
+                    (
+                        IsOpenStart || 
+                        ((this.IsOnDayTop || Calendar.DaysMode == CalendarDaysMode.Short) && !StartDate.TimeOfDay.Equals(new TimeSpan(0, 0, 0)))
+                    );
             }
         }
 
@@ -468,9 +482,14 @@ namespace System.Windows.Forms.Calendar
         {
             get
             {
-                return (IsOpenEnd || 
-                    ((this.IsOnDayTop || Calendar.DaysMode == CalendarDaysMode.Short) && !EndDate.TimeOfDay.Equals(new TimeSpan(23, 59, 59)))) &&
-                    !(Calendar.DaysMode == CalendarDaysMode.Short && StartDate.Date == EndDate.Date);
+                return _showTime &&
+                    (
+                        (
+                            IsOpenEnd || 
+                            ((this.IsOnDayTop || Calendar.DaysMode == CalendarDaysMode.Short) && !EndDate.TimeOfDay.Equals(new TimeSpan(23, 59, 59)))
+                        ) &&
+                        !(Calendar.DaysMode == CalendarDaysMode.Short && StartDate.Date == EndDate.Date)
+                    );
             }
         }
 
